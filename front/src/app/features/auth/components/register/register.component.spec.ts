@@ -9,14 +9,34 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { expect } from '@jest/globals';
 
 import { RegisterComponent } from './register.component';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { of, throwError } from 'rxjs';
+
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
+  let authServiceMock: jest.Mocked<AuthService>;
+  let routerMock: jest.Mocked<Router>;
+
   beforeEach(async () => {
+
+    authServiceMock = {
+      register: jest.fn().mockReturnValue(of(void 0)),
+    } as unknown as jest.Mocked<AuthService>;
+
+    routerMock = {
+      navigate: jest.fn()
+    } as unknown as jest.Mocked<Router>;
+
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
+      providers: [
+        { provide: AuthService, useValue: authServiceMock },
+        { provide: Router, useValue: routerMock }
+      ],
       imports: [
         BrowserAnimationsModule,
         HttpClientModule,
@@ -37,4 +57,33 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should validate form when inputs field are not empty', () => {
+    component.form.setValue({
+      email: 'test@gmail.com',
+      firstName: 'test',
+      lastName: 'test',
+      password: 'azerty'
+    })
+    expect(component.form.invalid).toBeFalsy();
+  });
+
+  it('should authService.register() when submit()', () => {
+    component.submit()
+    expect(authServiceMock.register).toHaveBeenCalled();
+  });
+
+  it('should navigate to /login when submit()', () => {
+    component.submit();
+    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
+  })
+
+  it('should set onErrror to true when submit() authService.register() throw error', () => {
+    authServiceMock.register.mockImplementation(() => {
+      const error = new Error('my error message')
+      return throwError(() => error);
+    });
+    component.submit();
+    expect(component.onError).toBeTruthy();
+  })
 });

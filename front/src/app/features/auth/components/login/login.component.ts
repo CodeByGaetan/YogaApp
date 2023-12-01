@@ -45,7 +45,7 @@ export class LoginComponent {
         this.sessionService.logIn(response);
         this.router.navigate(['/sessions']);
       },
-      error: error => this.onError = true,
+      error: _ => this.onError = true,
     });
   }
 }

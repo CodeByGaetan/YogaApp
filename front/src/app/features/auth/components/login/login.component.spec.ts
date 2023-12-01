@@ -17,37 +17,9 @@ import { SessionInformation } from 'src/app/interfaces/sessionInformation.interf
 import { Router } from '@angular/router';
 
 
-// class mockAuthService extends AuthService {
-
-//   const sessionInformation : SessionInformation = {
-//     token: '',
-//     type: '',
-//     id: 0,
-//     username: '',
-//     firstName: '',
-//     lastName: '',
-//     admin: false
-//   }
-
-//   public override login(loginRequest: LoginRequest): Observable<SessionInformation> {
-//       return this.sessionInformation;
-//   }
-// }
-
-
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
-  const sessionInformation: SessionInformation = {
-    token: '',
-    type: '',
-    id: 0,
-    username: '',
-    firstName: '',
-    lastName: '',
-    admin: false
-  }
 
   let authServiceMock: jest.Mocked<AuthService>;
   let sessionServiceMock: jest.Mocked<SessionService>;
@@ -56,7 +28,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
 
     authServiceMock = {
-      login: jest.fn().mockReturnValue(of(sessionInformation)),
+      login: jest.fn().mockReturnValue(of({} as SessionInformation)),
     } as unknown as jest.Mocked<AuthService>;
 
     sessionServiceMock = {
@@ -70,7 +42,6 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [
-        SessionService,
         { provide: AuthService, useValue: authServiceMock },
         { provide: SessionService, useValue: sessionServiceMock },
         { provide: Router, useValue: routerMock },
@@ -95,7 +66,7 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should validate form when inputs field are not empty', async () => {
+  it('should validate form when inputs field are not empty', () => {
 
     // TEST A RESOUDRE
     // const emailInput = fixture.nativeElement.querySelector('#email') as HTMLInputElement;

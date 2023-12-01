@@ -13,7 +13,6 @@ import { MeComponent } from './me.component';
 import { User } from 'src/app/interfaces/user.interface';
 import { of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
-import { any } from 'cypress/types/bluebird';
 import { Router } from '@angular/router';
 
 describe('MeComponent', () => {

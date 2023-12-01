@@ -7,6 +7,9 @@ import { expect } from '@jest/globals';
 import { SessionService } from '../../../../services/session.service';
 
 import { DetailComponent } from './detail.component';
+import { SessionApiService } from '../../services/session-api.service';
+import { Session } from '../../interfaces/session.interface';
+import { of } from 'rxjs';
 
 
 describe('DetailComponent', () => {
@@ -21,7 +24,22 @@ describe('DetailComponent', () => {
     }
   }
 
+  const sessionMock : Session = {
+    name: '',
+    description: '',
+    date: new Date(),
+    teacher_id: 0,
+    users: [mockSessionService.sessionInformation.id]
+  };
+
+  let sessionApiServiceMock : jest.Mocked<SessionApiService>;
+
   beforeEach(async () => {
+
+    sessionApiServiceMock = {
+      detail: jest.fn().mockReturnValue(of(sessionMock))
+    } as unknown as jest.Mocked<SessionApiService>;
+
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -30,13 +48,16 @@ describe('DetailComponent', () => {
         ReactiveFormsModule
       ],
       declarations: [DetailComponent],
-      providers: [{ provide: SessionService, useValue: mockSessionService }],
+      providers: [
+        { provide: SessionService, useValue: mockSessionService },
+        { provide: SessionApiService, useValue: sessionApiServiceMock },
+      ],
     })
       .compileComponents();
     service = TestBed.inject(SessionService);
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    // fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -49,9 +70,13 @@ describe('DetailComponent', () => {
     expect(window.history.back).toHaveBeenCalled();
   });
 
-  // it('should set isParticipate to True when participate function is called', () => {
-  //   component.ngOnInit();
-  //   expect(component.session).toBeDefined();
-  // })
+  // A FINALISER !!
+  it('should set isParticipate to True when participate function is called', () => {
+    component.ngOnInit();
+    expect(sessionApiServiceMock.detail).toHaveBeenCalled();
+    expect(component.session).toBe(sessionMock);
+    expect(component.isParticipate).toBeTruthy()
+    // expect(component.session).toBeDefined();
+  })
 
 });

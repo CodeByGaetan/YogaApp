@@ -43,7 +43,7 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should window.history.back() been called', () => {
+  it('should window.history.back() when back()', () => {
     jest.spyOn(window.history, 'back');
     component.back()
     expect(window.history.back).toHaveBeenCalled();

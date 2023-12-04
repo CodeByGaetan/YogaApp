@@ -11,7 +11,7 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
 
-  const mockSessionService = {
+  const sessionServiceMock = {
     sessionInformation: {
       admin: true
     }
@@ -21,7 +21,7 @@ describe('ListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ListComponent],
       imports: [HttpClientModule, MatCardModule, MatIconModule],
-      providers: [{ provide: SessionService, useValue: mockSessionService }]
+      providers: [{ provide: SessionService, useValue: sessionServiceMock }]
     })
       .compileComponents();
 
@@ -33,4 +33,9 @@ describe('ListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should user() return sessionService.sessionInformation', () => {
+    expect(component.user).toBe(sessionServiceMock.sessionInformation);
+  });
+
 });

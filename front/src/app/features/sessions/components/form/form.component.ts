@@ -48,7 +48,6 @@ export class FormComponent implements OnInit {
 
   public submit(): void {
     const session = this.sessionForm?.value as Session;
-
     if (!this.onUpdate) {
       this.sessionApiService
         .create(session)

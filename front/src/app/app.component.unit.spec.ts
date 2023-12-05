@@ -7,7 +7,6 @@ import { expect } from '@jest/globals';
 import { AppComponent } from './app.component';
 import { SessionService } from './services/session.service';
 import { of } from 'rxjs';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -45,7 +44,6 @@ describe('AppComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
   it('should create the app', () => {

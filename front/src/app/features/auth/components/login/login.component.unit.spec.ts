@@ -67,15 +67,6 @@ describe('LoginComponent', () => {
   });
 
   it('should validate form when inputs field are not empty', () => {
-
-    // TEST A RESOUDRE
-    // const emailInput = fixture.nativeElement.querySelector('#email') as HTMLInputElement;
-    // emailInput.value = 'test@gmail.com';
-    // const passwordInput = fixture.nativeElement.querySelector("#password") as HTMLInputElement;   
-    // passwordInput.value = 'gaga1232121';
-    // fixture.detectChanges();
-    // await fixture.whenStable();
-
     component.form.setValue({ email: "test@gmail.com", password: "azerty" })
     expect(component.form.invalid).toBeFalsy();
   });

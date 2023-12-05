@@ -110,11 +110,13 @@ describe('FormComponent', () => {
       component.ngOnInit();
       expect(routerMock.navigate).toHaveBeenCalledWith(['/sessions']);
     });
-    it('should init an empty form if router.url not includes "update"', () => {
-      expect(component.sessionForm).not.toBeDefined();
+    it('should init sessionForm when ngOnInit', () => {
+      expect(component.sessionForm).toBeUndefined();
       component.ngOnInit();
       expect(component.sessionForm).toBeDefined();
-      expect(component.sessionForm?.valid).not.toBeTruthy();
+    })
+    it('should init an empty form if router.url not includes "update"', () => {
+      expect(component.sessionForm?.valid).toBeFalsy();
     });
     it('should ... if router.url includes "update"', () => {
       // @ts-ignore : modify read-only property routerMock.url
@@ -131,9 +133,17 @@ describe('FormComponent', () => {
   });
 
   describe('submit', () => {
+
+    let session : Session;
+
+    beforeEach(async () => {
+      component.ngOnInit()
+      session = component.sessionForm?.value as Session
+    });
+
     it('should create session if onUpdate is false, by default', () => {
       component.submit();
-      expect(sessionApiServiceMock.create).toHaveBeenCalledWith(component.sessionForm);
+      expect(sessionApiServiceMock.create).toHaveBeenCalledWith(session);
       expect(matSnackBarMock.open).toHaveBeenCalledWith('Session created !', 'Close', { duration: 3000 });
       expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
     });
@@ -141,7 +151,7 @@ describe('FormComponent', () => {
       component.onUpdate = true;
       component.submit();
       // @ts-ignore : access private property component.id
-      expect(sessionApiServiceMock.update).toHaveBeenCalledWith(component.id, component.sessionForm);
+      expect(sessionApiServiceMock.update).toHaveBeenCalledWith(component.id, session);
       expect(matSnackBarMock.open).toHaveBeenCalledWith('Session updated !', 'Close', { duration: 3000 });
       expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
     });

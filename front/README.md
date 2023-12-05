@@ -47,6 +47,10 @@ By default the admin account is:
 
 ### Test
 
+Launching jest test coverage :
+
+> npm test -- --coverage
+
 #### E2E
 
 Launching e2e test:

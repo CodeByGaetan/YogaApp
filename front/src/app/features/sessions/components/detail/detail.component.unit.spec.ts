@@ -99,10 +99,9 @@ describe('DetailComponent', () => {
     service = TestBed.inject(SessionService);
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
@@ -115,25 +114,25 @@ describe('DetailComponent', () => {
     expect(component.teacher).toBe(teacherMock);
   })
 
-  it('should window.history.back() when back()', () => {
+  it('should call window.history.back() when back()', () => {
     jest.spyOn(window.history, 'back');
     component.back();
     expect(window.history.back).toHaveBeenCalled();
   });
 
-  it('should sessionApiService.delete(), matSnackBar.open() and router.navigate() when delete()', () => {
+  it('should call sessionApiService.delete(), matSnackBar.open() and router.navigate() when delete()', () => {
     component.delete();
     expect(sessionApiServiceMock.delete).toHaveBeenCalledWith(component.sessionId);
     expect(matSnackBarMock.open).toHaveBeenCalledWith('Session deleted !', 'Close', { duration: 3000 });
     expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
   });
 
-  it('should sessionApiService.participate() when participate()', () => {
+  it('should call sessionApiService.participate() when participate()', () => {
     component.participate();
     expect(sessionApiServiceMock.participate).toHaveBeenCalledWith(component.sessionId, component.userId);
   });
 
-  it('should sessionApiService.unParticipate() when unParticipate()', () => {
+  it('should call sessionApiService.unParticipate() when unParticipate()', () => {
     component.unParticipate();
     expect(sessionApiServiceMock.unParticipate).toHaveBeenCalledWith(component.sessionId, component.userId);
   });

@@ -93,32 +93,31 @@ describe('FormComponent', () => {
 
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('should not navigate to /sessions if admin', () => {
+  describe('when ngOnInit()', () => {
+    it('should not navigate to /sessions if admin user', () => {
       component.ngOnInit();
       expect(routerMock.navigate).not.toHaveBeenCalled();
     });
-    it('should navigate to /sessions if not admin', () => {
+    it('should navigate to /sessions if not admin user', () => {
       sessionServiceMock.sessionInformation!.admin = false;
       component.ngOnInit();
       expect(routerMock.navigate).toHaveBeenCalledWith(['/sessions']);
     });
-    it('should init sessionForm when ngOnInit', () => {
+    it('should init sessionForm', () => {
       expect(component.sessionForm).toBeUndefined();
       component.ngOnInit();
       expect(component.sessionForm).toBeDefined();
-    })
+    });
     it('should init an empty form if router.url not includes "update"', () => {
       expect(component.sessionForm?.valid).toBeFalsy();
     });
-    it('should ... if router.url includes "update"', () => {
+    it('should init the form with session data if router.url includes "update"', () => {
       // @ts-ignore : modify read-only property routerMock.url
       routerMock.url = '/update';
       component.ngOnInit();
@@ -132,13 +131,13 @@ describe('FormComponent', () => {
     });
   });
 
-  describe('submit', () => {
+  describe('when submit()', () => {
 
     let session : Session;
 
     beforeEach(async () => {
-      component.ngOnInit()
-      session = component.sessionForm?.value as Session
+      component.ngOnInit();
+      session = component.sessionForm?.value as Session;
     });
 
     it('should create session if onUpdate is false, by default', () => {

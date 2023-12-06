@@ -68,33 +68,31 @@ describe('MeComponent', () => {
 
     fixture = TestBed.createComponent(MeComponent);
     component = fixture.componentInstance;
-    // fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should userService.getById() and set user when ngOnInit()', () => {
-    expect(component.user).toBeUndefined()
-    component.ngOnInit()
+  it('should call userService.getById() and set user when ngOnInit()', () => {
+    expect(component.user).toBeUndefined();
+    component.ngOnInit();
     expect(userServiceMock.getById).toHaveBeenCalledWith(sessionServiceMock.sessionInformation!.id.toString());
     expect(component.user).toBeDefined();
   });
 
-  it('should window.history.back() when back()', () => {
+  it('should call window.history.back() when back()', () => {
     jest.spyOn(window.history, 'back');
-    component.back()
+    component.back();
     expect(window.history.back).toHaveBeenCalled();
   });
 
-  it('should userService.delete(), matSnackBar.open(), sessionService.logOut() and router.navigate() when delete()', () => {
+  it('should call userService.delete(), matSnackBar.open(), sessionService.logOut() and router.navigate() when delete()', () => {
     component.delete();
     expect(userServiceMock.delete).toHaveBeenCalledWith(sessionServiceMock.sessionInformation!.id.toString());
     expect(matSnackBarMock.open).toHaveBeenCalledWith("Your account has been deleted !", 'Close', { duration: 3000 });
     expect(sessionServiceMock.logOut).toHaveBeenCalled();
     expect(routerMock.navigate).toHaveBeenCalledWith(['/']);
-  })
-
+  });
 
 });

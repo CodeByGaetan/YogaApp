@@ -22,10 +22,10 @@ describe('AuthService', (): void => {
   });
 
   afterEach((): void => {
-    controller.verify()
+    controller.verify();
   })
 
-  it('should create', (): void => {
+  it('should be created', (): void => {
     expect(service).toBeTruthy();
   });
 

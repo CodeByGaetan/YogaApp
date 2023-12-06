@@ -54,11 +54,11 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should login properly', () => {
+  it('should login correctly', () => {
 
     const sessionInfoMock : SessionInformation = {
         token: '',
@@ -71,7 +71,7 @@ describe('LoginComponent', () => {
     }
     const authServiceSpy = jest.spyOn(authService, 'login').mockReturnValue(of(sessionInfoMock));
     const sessionServiceSpy = jest.spyOn(sessionService, 'logIn');
-    const routerSpy = jest.spyOn(router, 'navigate')
+    const routerSpy = jest.spyOn(router, 'navigate');
 
     component.form.setValue({ email: "test@gmail.com", password: "azerty" });
     component.submit();

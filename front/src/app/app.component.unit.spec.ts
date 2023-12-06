@@ -50,15 +50,15 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should sessionService.$isLogged() when $isLogged()', () => {
-    app.$isLogged()
-    expect(sessionServiceMock.$isLogged).toHaveBeenCalled()
+  it('should call sessionService.$isLogged() when $isLogged()', () => {
+    app.$isLogged();
+    expect(sessionServiceMock.$isLogged).toHaveBeenCalled();
   });
 
-  it('should sessionService.logout() and router.navigate() when logout()', () => {
-    app.logout()
-    expect(sessionServiceMock.logOut).toHaveBeenCalled()
-    expect(routerMock.navigate).toHaveBeenCalledWith([''])
+  it('should call sessionService.logOut() and router.navigate() when logout()', () => {
+    app.logout();
+    expect(sessionServiceMock.logOut).toHaveBeenCalled();
+    expect(routerMock.navigate).toHaveBeenCalledWith(['']);
   });
 
 });

@@ -20,7 +20,7 @@ describe('UserService', () => {
   });
 
   afterEach((): void => {
-    controller.verify()
+    controller.verify();
   });
 
   it('should be created', () => {
@@ -37,7 +37,7 @@ describe('UserService', () => {
       password: '',
       createdAt: new Date()
     }
-    const id = '1'
+    const id = '1';
     service.getById(id)
       .subscribe((response) => {
         expect(response).toBe(userMock);
@@ -49,7 +49,7 @@ describe('UserService', () => {
   });
 
   it('should handle Delete request properly', (done) => {
-    const id = '1'
+    const id = '1';
     service.delete(id)
       .subscribe((response) => {
         expect(response).toBe(null);

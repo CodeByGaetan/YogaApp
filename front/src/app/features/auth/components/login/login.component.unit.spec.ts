@@ -62,23 +62,21 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
   it('should validate form when inputs field are not empty', () => {
-    component.form.setValue({ email: "test@gmail.com", password: "azerty" })
+    component.form.setValue({ email: "test@gmail.com", password: "azerty" });
     expect(component.form.invalid).toBeFalsy();
   });
 
-  it('should authService.login() when submit()', () => {
-    // jest.spyOn(authServiceMock, 'login');
-    component.submit()
+  it('should call authService.login() when submit()', () => {
+    component.submit();
     expect(authServiceMock.login).toHaveBeenCalled();
   });
 
-  it('should sessionService.logIn() when submit()', () => {
-    // jest.spyOn(sessionServiceMock, 'logIn');
+  it('should call sessionService.logIn() when submit()', () => {
     component.submit();
     expect(sessionServiceMock.logIn).toHaveBeenCalled();
   });
@@ -86,15 +84,15 @@ describe('LoginComponent', () => {
   it('should navigate to /sessions when submit()', () => {
     component.submit();
     expect(routerMock.navigate).toHaveBeenCalledWith(['/sessions'])
-  })
+  });
 
-  it('should set onErrror to true when submit() authService.login() throw error', () => {
+  it('should set onErrror to true when authService.login() throw error during submit()', () => {
     authServiceMock.login.mockImplementation(() => {
-      const error = new Error('my error message')
+      const error = new Error('Error');
       return throwError(() => error);
     });
     component.submit();
     expect(component.onError).toBeTruthy();
-  })
+  });
 
 });

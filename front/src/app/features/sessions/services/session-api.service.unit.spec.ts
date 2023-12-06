@@ -28,7 +28,7 @@ describe('SessionsService', () => {
   });
 
   afterEach((): void => {
-    controller.verify()
+    controller.verify();
   });
 
   it('should be created', () => {
@@ -48,7 +48,7 @@ describe('SessionsService', () => {
   });
 
   it('should handle get Detail request properly', (done) => {
-    const id = '1'
+    const id = '1';
     service.detail(id)
       .subscribe((response) => {
         expect(response).toBe(sessionMock);
@@ -60,7 +60,7 @@ describe('SessionsService', () => {
   });
 
   it('should handle Delete request properly', (done) => {
-    const id = '1'
+    const id = '1';
     service.delete(id)
       .subscribe((response) => {
         expect(response).toBe(null);
@@ -84,7 +84,7 @@ describe('SessionsService', () => {
   });
 
   it('should handle Update request properly', (done) => {
-    const id = '1'
+    const id = '1';
     service.update(id, sessionMock)
       .subscribe((response) => {
         expect(response).toBe(sessionMock);
@@ -97,8 +97,8 @@ describe('SessionsService', () => {
   });
 
   it('should handle Participate request properly', (done) => {
-    const id = '1'
-    const userId = '2'
+    const id = '1';
+    const userId = '2';
     service.participate(id, userId)
       .subscribe((response) => {
         expect(response).toBe(null);
@@ -110,8 +110,8 @@ describe('SessionsService', () => {
   });
 
   it('should handle unParticipate request properly', (done) => {
-    const id = '1'
-    const userId = '2'
+    const id = '1';
+    const userId = '2';
     service.unParticipate(id, userId)
       .subscribe((response) => {
         expect(response).toBe(null);

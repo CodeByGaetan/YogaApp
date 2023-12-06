@@ -29,7 +29,7 @@ describe('TeacherService', () => {
   });
 
   afterEach((): void => {
-    controller.verify()
+    controller.verify();
   });
 
   it('should be created', () => {
@@ -49,7 +49,7 @@ describe('TeacherService', () => {
   });
 
   it('should handle get Detail request properly', (done) => {
-    const id = '1'
+    const id = '1';
     service.detail(id)
       .subscribe((response) => {
         expect(response).toBe(teacherMock);

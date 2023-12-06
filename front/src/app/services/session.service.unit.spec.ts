@@ -17,7 +17,7 @@ describe('SessionService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a Observable of boolean when $isLogged()', () => {
+  it('should return a boolean Observable when $isLogged()', () => {
     expect(service.$isLogged()).toBeInstanceOf(Observable<boolean>);
   });
 
@@ -36,7 +36,7 @@ describe('SessionService', () => {
     expect(service.isLogged).toBeTruthy();
   });
 
-  it('should unset sessionInformation and isLogged when logIn()', () => {
+  it('should unset sessionInformation and isLogged when logOut()', () => {
     service.logOut();
     expect(service.sessionInformation).toBeUndefined();
     expect(service.isLogged).toBeFalsy();

@@ -24,7 +24,7 @@ describe('RegisterComponent', () => {
   beforeEach(async () => {
 
     authServiceMock = {
-      register: jest.fn().mockReturnValue(of(void 0)),
+      register: jest.fn().mockReturnValue(of(void 0))
     } as unknown as jest.Mocked<AuthService>;
 
     routerMock = {
@@ -54,7 +54,7 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 
@@ -68,22 +68,22 @@ describe('RegisterComponent', () => {
     expect(component.form.invalid).toBeFalsy();
   });
 
-  it('should authService.register() when submit()', () => {
-    component.submit()
+  it('should call authService.register() when submit()', () => {
+    component.submit();
     expect(authServiceMock.register).toHaveBeenCalled();
   });
 
   it('should navigate to /login when submit()', () => {
     component.submit();
     expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
-  })
+  });
 
-  it('should set onErrror to true when submit() authService.register() throw error', () => {
+  it('should set onErrror to true when authService.register() throw error during submit()', () => {
     authServiceMock.register.mockImplementation(() => {
-      const error = new Error('my error message')
+      const error = new Error('my error message');
       return throwError(() => error);
     });
     component.submit();
     expect(component.onError).toBeTruthy();
-  })
+  });
 });

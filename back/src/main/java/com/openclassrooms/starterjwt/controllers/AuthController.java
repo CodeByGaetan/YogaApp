@@ -27,12 +27,13 @@ import com.openclassrooms.starterjwt.security.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    AuthController(AuthenticationManager authenticationManager,
+    public AuthController(AuthenticationManager authenticationManager,
             PasswordEncoder passwordEncoder,
             JwtUtils jwtUtils,
             UserRepository userRepository) {

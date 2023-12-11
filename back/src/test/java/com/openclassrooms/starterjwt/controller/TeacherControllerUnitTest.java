@@ -26,18 +26,18 @@ import com.openclassrooms.starterjwt.services.TeacherService;
 public class TeacherControllerUnitTest {
 
     @Mock
-    TeacherMapper teacherMapper;
+    private TeacherMapper teacherMapper;
 
     @Mock
-    TeacherService teacherService;
+    private TeacherService teacherService;
 
     @InjectMocks
-    TeacherController teacherControllerUnderTest;
+    private TeacherController teacherControllerUnderTest;
 
-    Long teacherId = 1L;
+    private Long teacherId = 1L;
 
-    Teacher teacher;
-    TeacherDto teacherDto;
+    private Teacher teacher;
+    private TeacherDto teacherDto;
 
     @BeforeEach
     public void init() {

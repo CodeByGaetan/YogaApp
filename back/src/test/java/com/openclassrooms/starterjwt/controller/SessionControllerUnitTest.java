@@ -27,20 +27,20 @@ import com.openclassrooms.starterjwt.services.SessionService;
 public class SessionControllerUnitTest {
 
     @Mock
-    SessionMapper sessionMapper;
+    private SessionMapper sessionMapper;
 
     @Mock
-    SessionService sessionService;
+    private SessionService sessionService;
 
     @InjectMocks
-    SessionController sessionControllerUnderTest;
+    private SessionController sessionControllerUnderTest;
 
-    Long sessionId = 1L;
-    String name = "Pilate";
-    Long userId = 2L;
+    private Long sessionId = 1L;
+    private String name = "Pilate";
+    private Long userId = 2L;
 
-    Session session;
-    SessionDto sessionDto;
+    private Session session;
+    private SessionDto sessionDto;
 
     @BeforeEach
     public void init() {

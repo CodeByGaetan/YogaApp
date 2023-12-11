@@ -40,7 +40,13 @@ INSERT INTO TEACHERS (first_name, last_name)
 VALUES ('Margot', 'DELAHAYE'),
        ('Hélène', 'THIERCELIN');
 
-
 INSERT INTO USERS (first_name, last_name, admin, email, password)
-VALUES ('Admin', 'Admin', true, 'yoga@studio.com', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq'); 
+VALUES  ('Admin', 'Admin', true, 'yoga@studio.com', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq'),
+        ('Admin2', 'Admin2', true, 'yoga2@studio.com', '$2a$10$.Hsa/ZjUVaHqi0tp9xieMeewrnZxrZ5pQRzddUXE/WjDu2ZThe6Iq');
 
+INSERT INTO SESSIONS (name, description, date, teacher_id)
+VALUES  ('Gym', 'Cours de gym avec un expert du domaine', '2023-12-28', 1),
+        ('Sophrologie', 'Cours de sophrologie avec un expert du domaine', '2023-01-03', 2);
+
+INSERT INTO PARTICIPATE (user_id, session_id)
+VALUES (1, 2);

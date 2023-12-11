@@ -29,22 +29,22 @@ import com.openclassrooms.starterjwt.services.UserService;
 public class UserControllerUnitTest {
 
     @Mock
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     @Mock
-    UserService userService;
+    private UserService userService;
 
     @Mock
-    SecurityContext securityContext;
+    private SecurityContext securityContext;
 
     @InjectMocks
-    UserController userControllerUnderTest;
+    private UserController userControllerUnderTest;
 
-    Long userId = 1L;
+    private Long userId = 1L;
 
-    User user;
-    UserDto userDto;
-    UserDetails userDetails;
+    private User user;
+    private UserDto userDto;
+    private UserDetails userDetails;
 
     @BeforeEach
     public void init() {

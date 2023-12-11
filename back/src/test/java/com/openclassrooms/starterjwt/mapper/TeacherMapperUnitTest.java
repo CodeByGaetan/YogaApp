@@ -1,6 +1,7 @@
 package com.openclassrooms.starterjwt.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +50,28 @@ public class TeacherMapperUnitTest {
     }
 
     @Test
+    public void convert_null_toDto() {
+        Teacher teacher = null;
+
+        TeacherDto testTeacherDto = teacherMapperUnderTest.toDto(teacher);
+
+        assertNull(testTeacherDto);
+    }
+
+    @Test
     public void convert_teacherDto_toEntity() {
         Teacher testTeacher = teacherMapperUnderTest.toEntity(teacherDto);
 
         assertEquals(teacher, testTeacher);
+    }
+
+    @Test
+    public void convert_null_toEntity() {
+        TeacherDto teacherDto = null;
+
+        Teacher testTeacher = teacherMapperUnderTest.toEntity(teacherDto);
+
+        assertNull(testTeacher);
     }
 
     @Test
@@ -69,6 +88,15 @@ public class TeacherMapperUnitTest {
     }
 
     @Test
+    public void convert_nullList_toDto() {
+        List<Teacher> teacherList = null;
+
+        List<TeacherDto> testTeacherDtoList = teacherMapperUnderTest.toDto(teacherList);
+
+        assertNull(testTeacherDtoList);
+    }
+
+    @Test
     public void convert_teacherDtoList_toEntity() {
         List<Teacher> teacherList = new ArrayList<>();
         teacherList.add(teacher);
@@ -79,6 +107,15 @@ public class TeacherMapperUnitTest {
         List<Teacher> testTeacherList = teacherMapperUnderTest.toEntity(teacherDtoList);
 
         assertEquals(teacherList, testTeacherList);
+    }
+
+    @Test
+    public void convert_nullList_toEntity() {
+        List<TeacherDto> teacherDtoList = null;
+
+        List<Teacher> testTeacherList = teacherMapperUnderTest.toEntity(teacherDtoList);
+
+        assertNull(testTeacherList);
     }
 
 }

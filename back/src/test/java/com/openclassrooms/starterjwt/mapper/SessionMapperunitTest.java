@@ -1,6 +1,7 @@
 package com.openclassrooms.starterjwt.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -89,6 +90,33 @@ public class SessionMapperunitTest {
     }
 
     @Test
+    public void convert_null_toDto() {
+        Session session = null;
+
+        SessionDto testSessionDto = sessionMapperUnderTest.toDto(session);
+
+        assertNull(testSessionDto);
+    }
+
+    @Test
+    public void convert_sessionWithTeacherNull_toDto() {
+        session.setTeacher(null);
+
+        SessionDto testSessionDto = sessionMapperUnderTest.toDto(session);
+        assertNull(testSessionDto.getTeacher_id());
+    }
+
+    @Test
+    public void convert_sessionWithTeacherIdNull_toDto() {
+        session.getTeacher().setId(null);
+
+        SessionDto testSessionDto = sessionMapperUnderTest.toDto(session);
+        assertNull(testSessionDto.getTeacher_id());
+    }
+
+
+
+    @Test
     public void convert_sessionDto_toEntity() {
 
         when(teacherService.findById(teacher.getId())).thenReturn(teacher);
@@ -104,6 +132,15 @@ public class SessionMapperunitTest {
     }
 
     @Test
+    public void convert_null_toEntity() {
+        SessionDto sessionDto = null;
+
+        Session testSession = sessionMapperUnderTest.toEntity(sessionDto);
+
+        assertNull(testSession);
+    }
+
+    @Test
     public void convert_sessionList_toDto() {
 
         List<Session> sessionList = new ArrayList<>();
@@ -115,6 +152,15 @@ public class SessionMapperunitTest {
         List<SessionDto> testSessionDtoList = sessionMapperUnderTest.toDto(sessionList);
 
         assertEquals(sessionDtoList, testSessionDtoList);
+    }
+
+    @Test
+    public void convert_nullList_toDto() {
+        List<Session> sessionList = null;
+
+        List<SessionDto> testSessionDtoList = sessionMapperUnderTest.toDto(sessionList);
+
+        assertNull(testSessionDtoList);
     }
 
     @Test
@@ -136,6 +182,15 @@ public class SessionMapperunitTest {
         verify(userService).findById(user1.getId());
         verify(userService).findById(user2.getId());
         assertEquals(sessionList, testSessionList);
+    }
+
+    @Test
+    public void convert_nullList_toEntity() {
+        List<SessionDto> sessionDtoList = null;
+
+        List<Session> testSessionList = sessionMapperUnderTest.toEntity(sessionDtoList);
+
+        assertNull(testSessionList);
     }
 
 }

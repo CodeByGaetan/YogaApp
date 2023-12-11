@@ -12,7 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
 
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../services/auth.service';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
 import { Router } from '@angular/router';
 
@@ -69,6 +69,7 @@ describe('LoginComponent', () => {
         lastName: '',
         admin: false
     }
+    
     const authServiceSpy = jest.spyOn(authService, 'login').mockReturnValue(of(sessionInfoMock));
     const sessionServiceSpy = jest.spyOn(sessionService, 'logIn');
     const routerSpy = jest.spyOn(router, 'navigate');

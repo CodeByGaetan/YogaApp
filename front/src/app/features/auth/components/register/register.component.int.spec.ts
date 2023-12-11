@@ -12,32 +12,24 @@ import { RegisterComponent } from './register.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
-  let authServiceMock: jest.Mocked<AuthService>;
-  let routerMock: jest.Mocked<Router>;
+  let authService : AuthService;
+  let router : Router;
 
   beforeEach(async () => {
-
-    authServiceMock = {
-      register: jest.fn().mockReturnValue(of(void 0))
-    } as unknown as jest.Mocked<AuthService>;
-
-    routerMock = {
-      navigate: jest.fn()
-    } as unknown as jest.Mocked<Router>;
-
     await TestBed.configureTestingModule({
       declarations: [RegisterComponent],
       providers: [
-        { provide: AuthService, useValue: authServiceMock },
-        { provide: Router, useValue: routerMock }
+        AuthService
       ],
       imports: [
+        RouterTestingModule,
         BrowserAnimationsModule,
         HttpClientModule,
         ReactiveFormsModule,  
@@ -51,6 +43,10 @@ describe('RegisterComponent', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
+
+    authService = TestBed.inject(AuthService);
+    router = TestBed.inject(Router)
+
     fixture.detectChanges();
   });
 
@@ -58,29 +54,40 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should validate form when inputs field are not empty', () => {
+  it('sould register user properly', () => {
     component.form.setValue({
       email: 'test@gmail.com',
       firstName: 'test',
       lastName: 'test',
       password: 'azerty'
-    })
+    });
+
     expect(component.form.invalid).toBeFalsy();
-  });
 
-  it('should call authService.register() when submit()', () => {
-    component.submit();
-    expect(authServiceMock.register).toHaveBeenCalled();
-  });
+    const authServiceSpy = jest.spyOn(authService, 'register').mockReturnValue(of(void 0));
+    const routerSpy = jest.spyOn(router, 'navigate');
 
-  it('should navigate to /login when submit()', () => {
     component.submit();
-    expect(routerMock.navigate).toHaveBeenCalledWith(['/login']);
-  });
 
-  it('should set onErrror to true when authService.register() throw error during submit()', () => {
-    authServiceMock.register.mockReturnValue(throwError(() => new Error()));
+    expect(authServiceSpy).toHaveBeenCalled();
+    expect(routerSpy).toHaveBeenCalledWith(['/login']);
+  })
+
+  it('should set error if registration failed', () => {
+    component.form.setValue({
+      email: 'test@gmail.com',
+      firstName: 'test',
+      lastName: 'test',
+      password: 'azerty'
+    });
+
+    expect(component.form.invalid).toBeFalsy();
+
+    const authServiceSpy = jest.spyOn(authService, 'register').mockReturnValue(throwError(() => new Error()));
+
     component.submit();
-    expect(component.onError).toBeTruthy();
-  });
+
+    expect(component.onError).toBeTruthy()
+  })
+
 });

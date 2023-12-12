@@ -8,14 +8,13 @@ import { SessionService } from '../../../../services/session.service';
 
 import { DetailComponent } from './detail.component';
 import { SessionApiService } from '../../services/session-api.service';
-import { Session } from '../../interfaces/session.interface';
 import { of } from 'rxjs';
 import { TeacherService } from 'src/app/services/teacher.service';
 import { Teacher } from 'src/app/interfaces/teacher.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
-import { FileCoverage } from 'istanbul-lib-coverage';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Session } from '../../interfaces/session.interface';
 
 
 describe('DetailComponent', () => {
@@ -32,14 +31,6 @@ describe('DetailComponent', () => {
     lastName: ''
   }
 
-  const teacherMock: Teacher = {
-    id: 0,
-    lastName: '',
-    firstName: '',
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-
   let sessionService: SessionService;
   let sessionApiService: SessionApiService;
   let teacherService: TeacherService;
@@ -47,6 +38,7 @@ describe('DetailComponent', () => {
   let router: Router;
 
   let activatedRouteMock: jest.Mocked<ActivatedRoute>;
+  let sessionMock : jest.Mocked<Session>
 
   beforeEach(async () => {
 
@@ -57,6 +49,14 @@ describe('DetailComponent', () => {
         }
       }
     } as unknown as jest.Mocked<ActivatedRoute>;
+
+    sessionMock = {
+      name: 'Test',
+      description: 'Description Test',
+      date: new Date(),
+      teacher_id: 2,
+      users: []
+    };
 
     await TestBed.configureTestingModule({
       imports: [
@@ -108,21 +108,27 @@ describe('DetailComponent', () => {
     await expect(routerSpy).toHaveBeenCalledWith(['sessions']);
   });
 
-  // it('should call sessionApiService.delete(), matSnackBar.open() and router.navigate() when delete()', () => {
-  //   component.delete();
-  //   
-  //   
-  //   expect(routerMock.navigate).toHaveBeenCalledWith(['sessions']);
-  // });
+  it('should participate properly', () => {
+    const sessionApiServiceSpy = jest.spyOn(sessionApiService, 'participate').mockReturnValue(of(void 0));
 
-  // it('should call sessionApiService.participate() when participate()', () => {
-  //   component.participate();
-  //   expect(sessionApiServiceMock.participate).toHaveBeenCalledWith(component.sessionId, component.userId);
-  // });
+    sessionMock.users.push(sessionInfoMock.id);
+    const sessionApiServiceSpy2 = jest.spyOn(sessionApiService, 'detail').mockReturnValue(of(sessionMock));
+    
+    component.participate();
+    expect(sessionApiServiceSpy).toHaveBeenCalledWith(component.sessionId, component.userId);
+    expect(sessionApiServiceSpy2).toHaveBeenCalledWith(component.sessionId);
+    expect(component.isParticipate).toBeTruthy();
+  });
 
-  // it('should call sessionApiService.unParticipate() when unParticipate()', () => {
-  //   component.unParticipate();
-  //   expect(sessionApiServiceMock.unParticipate).toHaveBeenCalledWith(component.sessionId, component.userId);
-  // });
+  it('should unparticipate properly', () => {
+    const sessionApiServiceSpy = jest.spyOn(sessionApiService, 'unParticipate').mockReturnValue(of(void 0));
 
+    const sessionApiServiceSpy2 = jest.spyOn(sessionApiService, 'detail').mockReturnValue(of(sessionMock));
+    
+    component.unParticipate();
+    expect(sessionApiServiceSpy).toHaveBeenCalledWith(component.sessionId, component.userId);
+    expect(sessionApiServiceSpy2).toHaveBeenCalledWith(component.sessionId);
+    expect(component.isParticipate).toBeFalsy();
+  });
+  
 });

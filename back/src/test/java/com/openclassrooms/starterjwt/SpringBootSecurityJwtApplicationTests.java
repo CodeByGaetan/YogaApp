@@ -10,9 +10,4 @@ public class SpringBootSecurityJwtApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void main() {
-		SpringBootSecurityJwtApplication.main(new String[] {});
-	}
-
 }

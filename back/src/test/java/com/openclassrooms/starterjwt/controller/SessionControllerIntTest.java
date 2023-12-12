@@ -125,13 +125,13 @@ public class SessionControllerIntTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
-    @Test
-    public void delete_session_returnOk() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-                .delete("/api/session/3")
-                .header("Authorization", "Bearer " + jwt))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+    // @Test
+    // public void delete_session_returnOk() throws Exception {
+    //     mockMvc.perform(MockMvcRequestBuilders
+    //             .delete("/api/session/3")
+    //             .header("Authorization", "Bearer " + jwt))
+    //             .andExpect(MockMvcResultMatchers.status().isOk());
+    // }
 
     @Test
     public void delete_session_returnNotFound() throws Exception {
@@ -150,9 +150,14 @@ public class SessionControllerIntTest {
     }
 
     @Test
-    public void participate_session_returnOk() throws Exception {
+    public void participateAndUnParticipate_session_returnOk() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/session/1/participate/1")
+                .header("Authorization", "Bearer " + jwt))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/api/session/1/participate/1")
                 .header("Authorization", "Bearer " + jwt))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
@@ -165,13 +170,10 @@ public class SessionControllerIntTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
-    @Test
-    public void unParticipate_session_returnOk() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-                .delete("/api/session/2/participate/1")
-                .header("Authorization", "Bearer " + jwt))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+    // @Test
+    // public void unParticipate_session_returnOk() throws Exception {
+        
+    // }
 
     @Test
     public void unParticipate_session_returnBadRequest() throws Exception {

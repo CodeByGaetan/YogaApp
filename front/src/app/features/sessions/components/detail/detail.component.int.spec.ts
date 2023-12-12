@@ -10,7 +10,6 @@ import { DetailComponent } from './detail.component';
 import { SessionApiService } from '../../services/session-api.service';
 import { of } from 'rxjs';
 import { TeacherService } from 'src/app/services/teacher.service';
-import { Teacher } from 'src/app/interfaces/teacher.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionInformation } from 'src/app/interfaces/sessionInformation.interface';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';

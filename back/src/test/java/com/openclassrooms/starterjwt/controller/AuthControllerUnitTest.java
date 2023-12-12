@@ -51,7 +51,6 @@ public class AuthControllerUnitTest {
         @Test
         public void logIn_userFoundByEmail_returnOk() {
 
-                // Given
                 Long id = 1L;
                 String username = "yoga@studio.com";
                 String lastName = "Studio";
@@ -93,11 +92,9 @@ public class AuthControllerUnitTest {
                                                                 .admin(admin)
                                                                 .build()));
 
-                // When
                 ResponseEntity<?> response = authControllerUnderTest.authenticateUser(loginRequest);
                 JwtResponse responseBody = (JwtResponse) response.getBody();
 
-                // Then
                 verify(authenticationManager).authenticate(new UsernamePasswordAuthenticationToken(username, password));
                 verify(jwtUtils).generateJwtToken(authentication);
                 verify(userRepository).findByEmail(username);
@@ -114,7 +111,6 @@ public class AuthControllerUnitTest {
         @Test
         public void logIn_userNotFoundByEmail_returnOk() {
 
-                // Given
                 Long id = 1L;
                 String username = "yoga@studio.com";
                 String lastName = "Studio";
@@ -147,11 +143,9 @@ public class AuthControllerUnitTest {
 
                 when(userRepository.findByEmail(username)).thenReturn(Optional.empty());
 
-                // When
                 ResponseEntity<?> response = authControllerUnderTest.authenticateUser(loginRequest);
                 JwtResponse responseBody = (JwtResponse) response.getBody();
 
-                // Then
                 verify(authenticationManager).authenticate(new UsernamePasswordAuthenticationToken(username, password));
                 verify(jwtUtils).generateJwtToken(authentication);
                 verify(userRepository).findByEmail(username);
@@ -167,7 +161,6 @@ public class AuthControllerUnitTest {
 
         @Test
         public void register_user_returnOk() {
-                // Given
                 String username = "yoga@studio.com";
                 String lastName = "Studio";
                 String firstName = "Yoga";
@@ -185,14 +178,12 @@ public class AuthControllerUnitTest {
 
                 final ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
 
-                // When
                 ResponseEntity<?> response = authControllerUnderTest.registerUser(signupRequest);
                 MessageResponse responseBody = (MessageResponse) response.getBody();
 
                 verify(userRepository).save(userCaptor.capture());
                 User savedUser = userCaptor.getValue();
 
-                // Then
                 verify(userRepository).existsByEmail(username);
                 verify(passwordEncoder).encode(password);
                 assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -205,7 +196,6 @@ public class AuthControllerUnitTest {
 
         @Test
         public void register_user_returnBadRequest() {
-                // Given
                 String username = "yoga@studio.com";
                 String lastName = "Studio";
                 String firstName = "Yoga";
@@ -219,11 +209,9 @@ public class AuthControllerUnitTest {
 
                 when(userRepository.existsByEmail(username)).thenReturn(true);
 
-                // When
                 ResponseEntity<?> response = authControllerUnderTest.registerUser(signupRequest);
                 MessageResponse responseBody = (MessageResponse) response.getBody();
 
-                // Then
                 verify(userRepository).existsByEmail(username);
                 assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
                 assertEquals("Error: Email is already taken!", responseBody.getMessage());

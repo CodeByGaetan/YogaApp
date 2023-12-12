@@ -1,6 +1,6 @@
 # Yoga App
 
-A complete web application, from Front-end to Back-end, to configure a gym class reservation system !
+A complete web application, from Back-end to Front-end, to configure a gym class reservation system !
 
 The Front-End uses :  
 ![Static Badge](https://img.shields.io/badge/Angular-14.2.0-red)
@@ -16,12 +16,8 @@ The Back-end uses :
 ## Getting started
 
 ### Clone the project
-
 Clone the project in the directory of your choice :
-    
-```
-git clone https://github.com/CodeByGaetan/YogaApp.git
-```
+>git clone https://github.com/CodeByGaetan/YogaApp.git
 
 ### MySQL
 - Install MySQL on the localhost and enable the service
@@ -42,7 +38,6 @@ The username and password must be the same than in the application.properties fi
 - Run `npm install` to install the dependencies
 - Run `npm run start` to start the front-end
 - To use the app, navigate to http://localhost:4200/
-
 - By default the admin account is:
     - login: yoga@studio.com  
     - password: test!1234
@@ -50,7 +45,6 @@ The username and password must be the same than in the application.properties fi
 
 ## Front-end tests
 The following commands must be execute from the directory : `/YogaApp/front`
-
 
 ### Unit and Integration tests with Jest
 
@@ -60,9 +54,12 @@ The following commands must be execute from the directory : `/YogaApp/front`
 - The generated coverage report is located here :  
   >/coverage/jest/lcov-report/index.html
 
-- Coverage report of unit and integration tests on Front-end :  
-  ![Jest Coverage Report](ressources/coverage-report/Jest_coverage.png)
+- For following tests on changed files :
+  >npm run test:watch -- --coverage
 
+- Coverage report of unit and integration tests :
+
+  ![Jest Coverage Report](ressources/coverage-report/Jest_coverage.png)
 
 ### End-to-end tests with Cypress
 
@@ -76,9 +73,29 @@ The following commands must be execute from the directory : `/YogaApp/front`
 - The generated coverage report is located here :  
   >/coverage/lcov-report/index.html
 
-- Coverage report of end-to-end tests :  
+- Coverage report of end-to-end tests :
+
   ![Cypress Coverage Report](ressources/coverage-report/Cypress_coverage.png)
 
 
 ## Back-end tests
 The following commands must be execute from the directory : `/YogaApp/back`
+
+### Unit and Integration tests with Junit
+
+- Launch tests and generate the coverage report :
+  >mvn clean test
+
+- The generated coverage report is located here :  
+  >/target/site/jacoco/index.html
+
+- Coverage report of unit and integration tests :
+
+  ![Junit Coverage Report](ressources/coverage-report/Junit_coverage.png)
+
+## Other ressource
+
+For Postman import the collection :  
+> /YogaApp/ressources/postman/yoga.postman_collection.json 
+
+by following [this documentation](https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-and-exporting-overview/).

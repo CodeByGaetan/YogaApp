@@ -125,14 +125,6 @@ public class SessionControllerIntTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
-    // @Test
-    // public void delete_session_returnOk() throws Exception {
-    //     mockMvc.perform(MockMvcRequestBuilders
-    //             .delete("/api/session/3")
-    //             .header("Authorization", "Bearer " + jwt))
-    //             .andExpect(MockMvcResultMatchers.status().isOk());
-    // }
-
     @Test
     public void delete_session_returnNotFound() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
@@ -169,11 +161,6 @@ public class SessionControllerIntTest {
                 .header("Authorization", "Bearer " + jwt))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
-
-    // @Test
-    // public void unParticipate_session_returnOk() throws Exception {
-        
-    // }
 
     @Test
     public void unParticipate_session_returnBadRequest() throws Exception {

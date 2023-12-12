@@ -56,14 +56,6 @@ public class UserControllerIntTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
-    // @Test
-    // public void delete_user_returnOk() throws Exception {
-    //     mockMvc.perform(MockMvcRequestBuilders
-    //             .delete("/api/user/3")
-    //             .header("Authorization", "Bearer " + jwt))
-    //             .andExpect(MockMvcResultMatchers.status().isOk());
-    // }
-
     @Test
     public void delete_user_returnNotFound() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
@@ -99,6 +91,5 @@ public class UserControllerIntTest {
                 .header("Authorization", "Bearer " + jwt2))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
-
 
 }

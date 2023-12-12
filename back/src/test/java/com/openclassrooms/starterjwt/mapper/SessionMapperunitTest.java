@@ -25,7 +25,7 @@ import com.openclassrooms.starterjwt.services.TeacherService;
 import com.openclassrooms.starterjwt.services.UserService;
 
 @ExtendWith(MockitoExtension.class)
-public class SessionMapperunitTest {
+public class SessionMapperUnitTest {
 
     @Mock
     private UserService userService;

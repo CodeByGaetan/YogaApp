@@ -30,6 +30,8 @@ The username and password must be the same than in the application.properties fi
 
 ### Back-end
 - Open your IDE (VS Code, Eclipse, etc.) in the directory : `/YogaApp/back`
+- In the file `application.properties` (located at : `/YogaApp/back/src/main/resources`):
+  set the properties `spring.datasource.username` and `spring.datasource.password` with the same username and password than the previously defined MySQL user.
 - Run `mvn spring-boot:run` to launch the back-end in developpment mode
 - Or run `mvn package` to build the project and then run `java -jar target/yoga-app-0.0.1-SNAPSHOT.jar` to launch the built package.
 

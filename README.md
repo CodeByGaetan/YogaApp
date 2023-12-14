@@ -2,7 +2,7 @@
 
 A complete web application, from Back-end to Front-end, to configure a gym class reservation system !
 
-The Front-End uses :  
+The Front-end uses :  
 ![Static Badge](https://img.shields.io/badge/Angular-14.2.0-red)
 ![Static Badge](https://img.shields.io/badge/Jest-28.1.3-green)
 ![Static Badge](https://img.shields.io/badge/Cypress-10.4.0-blue)
